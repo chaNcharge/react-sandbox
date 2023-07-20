@@ -1,0 +1,14 @@
+.mylabel {
+    display: block;
+}
+
+.myinput {
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.myimg {
+    width: 200px;
+    height: 200px;
+}
+
