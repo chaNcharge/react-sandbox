@@ -1,7 +1,7 @@
 import { useImmer } from 'use-immer';
 import AddTodo from '../components/AddTodo';
-import TaskList from '../components/TaskList'
-import { todo } from 'node:test';
+import TaskList from '../components/TaskList';
+import styles from '../styles/todolist.module.css'
 
 let nextId = 3;
 const initialTodos = [
@@ -48,7 +48,7 @@ export default function TaskApp() {
     }
 
     return (
-        <>
+        <div className={styles.container}>
             <h1>To Do List</h1>
             <AddTodo
                 onAddTodo={handleAddTodo}
@@ -60,6 +60,6 @@ export default function TaskApp() {
                 highlightedId={highlightedId}
                 onHover={handleHover}
             />
-        </>
+        </div>
     );
 }
