@@ -1,6 +1,7 @@
 import { useImmer } from 'use-immer';
-import AddTodo from '../components/AddTodo.jsx';
-import TaskList from '../components/TaskList.jsx'
+import AddTodo from '../components/AddTodo';
+import TaskList from '../components/TaskList'
+import { todo } from 'node:test';
 
 let nextId = 3;
 const initialTodos = [
@@ -10,11 +11,10 @@ const initialTodos = [
 ];
 
 export default function TaskApp() {
-    const [todos, updateTodos] = useImmer(
-        initialTodos
-    );
+    const [todos, updateTodos] = useImmer(initialTodos);
+    const [highlightedId, setHighlightedId] = useImmer(null);
 
-    function handleAddTodo(title) {
+    function handleAddTodo(title: string) {
         updateTodos(draft => {
             draft.push({
                 id: nextId++,
@@ -24,7 +24,7 @@ export default function TaskApp() {
         })
     }
 
-    function handleChangeTodo(nextTodo) {
+    function handleChangeTodo(nextTodo: { id: number; title: string; done: boolean; }) {
         updateTodos(draft => {
             const todo = draft.find(t =>
                 t.id === nextTodo.id
@@ -34,7 +34,7 @@ export default function TaskApp() {
         })
     }
 
-    function handleDeleteTodo(todoId) {
+    function handleDeleteTodo(todoId: number) {
         updateTodos(draft => {
             const index = draft.findIndex(t =>
                 t.id === todoId
@@ -43,8 +43,13 @@ export default function TaskApp() {
         })
     }
 
+    function handleHover(todoId: number) {
+        setHighlightedId(todoId);
+    }
+
     return (
         <>
+            <h1>To Do List</h1>
             <AddTodo
                 onAddTodo={handleAddTodo}
             />
@@ -52,6 +57,8 @@ export default function TaskApp() {
                 todos={todos}
                 onChangeTodo={handleChangeTodo}
                 onDeleteTodo={handleDeleteTodo}
+                highlightedId={highlightedId}
+                onHover={handleHover}
             />
         </>
     );

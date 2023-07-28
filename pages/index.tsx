@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import LikeButton from '../components/LikeButton';
 import { LikeHeader } from '../components/LikeButton';
 import { getImageUrl } from '../components/utils';
+import Image from 'next/image';
 
 
 const user = {
@@ -18,13 +19,12 @@ export default function HomePage() {
         <>
             <Header title="Develop. Preview. Ship. 🚀" />
             <h1>{user.name}</h1>
-            <img
+            <Image
                 className="avatar"
                 src={user.imageUrl}
-                style={{
-                    width: user.imageSize,
-                    height: user.imageSize
-                }}
+                alt="avatar"
+                width={user.imageSize}
+                height={user.imageSize}
             />
             <ul>
                 {names.map(name => (<li key={name}>{name}</li>))}
@@ -46,7 +46,7 @@ function Profile({ person, imageSize = 70 }) {
     return (
         <section className="profile">
             <h2>{person.name}</h2>
-            <img
+            <Image
                 className="avatar"
                 src={imageSrc}
                 alt={person.name}
@@ -115,7 +115,7 @@ function CardedProfile() {
     return (
         <div>
             <Card title="Photo">
-                <img
+                <Image
                     className="avatar"
                     src="https://i.imgur.com/OKS67lhm.jpg"
                     alt="Aklilu Lemma"

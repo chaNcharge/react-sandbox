@@ -1,11 +1,11 @@
-import { useContext, useState } from 'react';
+import { Key, useContext, useState } from 'react';
 import { TasksContext, TasksDispatchContext } from '../../contexts/TasksContext';
 
 export default function TaskList() {
     const tasks = useContext(TasksContext);
     return (
         <ul>
-            {tasks.map((task) => (
+            {tasks.map((task: { id: Key; }) => (
                 <li key={task.id}>
                     <Task task={task} />
                 </li>
@@ -18,7 +18,7 @@ function Task({ task }) {
     const [isEditing, setIsEditing] = useState(false);
     const dispatch = useContext(TasksDispatchContext);
 
-    let taskContent;
+    let taskContent: JSX.Element;
     if (isEditing) {
         taskContent = (
             <>

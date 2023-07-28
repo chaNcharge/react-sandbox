@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Letter from '../components/Letter.jsx'
+import Letter from '../components/Letter'
 
 export default function MailClient() {
     const initialLetters = [{
@@ -22,7 +22,7 @@ export default function MailClient() {
 
     const selectedCount = selectedIds.size;
 
-    function handleToggle(toggledId) {
+    function handleToggle(toggledId: number) {
         const nextIds = new Set(selectedIds);
         if (nextIds.has(toggledId)) {
             nextIds.delete(toggledId);
@@ -32,11 +32,11 @@ export default function MailClient() {
         setSelectedIds(nextIds);
     }
 
-    function handleHover(letterId) {
+    function handleHover(letterId: number) {
         setHighlightedId(letterId);
     }
 
-    function handleStar(starred) {
+    function handleStar(starred: { id: number; }) {
         setLetters(letters.map(letter => {
             if (letter.id === starred.id) {
                 return {

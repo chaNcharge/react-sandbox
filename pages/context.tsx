@@ -1,10 +1,17 @@
 import { useState } from 'react';
 import { useContext } from 'react';
-import { ImageSizeContext } from '../contexts/Context.jsx';
+import { ImageSizeContext } from '../contexts/Context';
+import Image from "next/image"
+
+interface Place {
+    id: number;
+    name: string;
+    description: string;
+}
 
 export default function App() {
     const [isLarge, setIsLarge] = useState(false);
-    const imageSize = isLarge ? 150 : 100;
+    const imageSize: number = isLarge ? 150 : 100;
     return (
         <>
             <ImageSizeContext.Provider value={imageSize}>
@@ -19,7 +26,7 @@ export default function App() {
                     Use large images
                 </label>
                 <hr />
-                <List imageSize={imageSize} />
+                <List />
             </ImageSizeContext.Provider>
         </>
     )
@@ -38,7 +45,7 @@ function List() {
     return <ul>{listItems}</ul>;
 }
 
-function Place({ place }) {
+function Place({ place }: { place: Place; imageSize: number }) {
     const imageSize = useContext(ImageSizeContext);
     return (
         <>
@@ -54,10 +61,10 @@ function Place({ place }) {
     );
 }
 
-function PlaceImage({ place }) {
+function PlaceImage({ place }: { place: Place; imageSize: number }) {
     const imageSize = useContext(ImageSizeContext);
     return (
-        <img
+        <Image
             src={getImageUrl(place)}
             alt={place.name}
             width={imageSize}

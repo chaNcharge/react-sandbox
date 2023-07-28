@@ -1,5 +1,6 @@
 import { useImmer } from 'use-immer';
 import "../styles/immerdemo.module.css";
+import Image from 'next/image';
 
 export default function Form() {
     const [person, updatePerson] = useImmer({
@@ -76,9 +77,11 @@ export default function Form() {
                 <br />
                 (located in {person.artwork.city})
             </p>
-            <img
+            <Image
                 src={person.artwork.image}
                 alt={person.artwork.title}
+                width={400}
+                height={400}
                 className='myimg'
             />
         </>

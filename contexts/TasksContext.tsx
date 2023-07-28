@@ -16,7 +16,10 @@ export default function TasksProvider({ children }) {
     );
 }
 
-function tasksReducer(draft, action) {
+function tasksReducer(
+    draft: { id: any; text: any; done: boolean; }[], 
+    action: { type: string; id: number; text: string; task: { id: number; text: string; done: boolean; }; 
+}) {
     switch (action.type) {
         case 'added': {
             draft.push({
