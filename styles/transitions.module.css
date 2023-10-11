@@ -1,0 +1,8 @@
+.list-item {
+    transition: transform 0.3s ease-in-out;
+}
+
+.move {
+    transform: translateX(100%);
+    /* Adjust the value based on your needs */
+}
